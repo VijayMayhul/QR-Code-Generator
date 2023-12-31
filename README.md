@@ -21,7 +21,7 @@ I learned to fetch the API data using async method and error handling method in 
 
 ## Website
 
-[QR-Code-Generator]()
+[QR-Code-Generator](https://qr-code-generator-seven-sand.vercel.app/)
 
 
 ## Screenshots
