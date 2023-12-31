@@ -1,4 +1,3 @@
-
 //container
 const container = document.createElement("div");
 container.setAttribute('class', 'container h-100');
@@ -116,9 +115,10 @@ let getQRCode = async () => {
             buttonDownload.setAttribute('href', imageUrl);
             buttonDownload.setAttribute('download', 'qrcode.png');
         } catch (error) {
+            // alert('There is a problem while fetching/ \nMaybe the Server Down \n', error);
             alert(`Maybe the Server Down, Try Again Later/
 There is a problem while fetching/
-${error}`);   
+${error}`);
         }
     }
     document.getElementById("Url").value = "";
