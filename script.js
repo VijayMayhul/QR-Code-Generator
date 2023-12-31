@@ -109,12 +109,23 @@ let getQRCode = async () => {
 
             let img = document.getElementById("qrImg");
             img.setAttribute('src', `${imageUrl}`);
-
+            
             let buttonDownload = document.getElementById("buttonDownload");
             buttonDownload.removeAttribute("disabled");
             buttonDownload.setAttribute('class', 'btn btn-success col-8 col-md-6 col-lg-5 mt-3');
             buttonDownload.setAttribute('href', imageUrl);
             buttonDownload.setAttribute('download', 'qrcode.png');
+            
+            buttonDownload.addEventListener('click', () => {
+
+                setTimeout(() => {
+                    qrDiv.setAttribute('class', 'QrDiv bg-secondary p-0 d-flex justify-content-center align-items-center');
+                img.setAttribute('src', 'Img/qr_gif2.gif');
+                buttonDownload.setAttribute('class', 'btn btn-secondary disabled col-8 col-md-6 col-lg-5');
+                document.getElementById("Url").value = "";
+                }, 10000);
+
+            });
         } catch (error) {
             // alert('There is a problem while fetching/ \nMaybe the Server Down \n', error);
             alert(`Maybe the Server Down, Try Again Later/
