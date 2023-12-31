@@ -89,33 +89,31 @@ document.body.appendChild(container);
 let getQRCode = async () => {
     let url = document.getElementById("Url").value.trim();
     // console.log(url);
-
+    
     if (url === "" || url === undefined) {
         alert(`You have to give some value in the input field`);
     } else {
         try {
-            // let response = await fetch(`http://api.qrserver.com/v1/create-qr-code/?size=400x400&data=${url}`);
+            let response = await fetch(`https://api.qrserver.com/v1/create-qr-code/?size=400x400&data=${url}`);
             // let response = `https://www.qrtag.net/api/qr_transparent.png?url=${url}&size=300`;
 
-            let response = `http://api.qrserver.com/v1/create-qr-code/?size=400x400&data=${url}`;
+            if (!response.ok) {
+                throw new Error('Network response Error');
+            }
 
-            // if (!response.ok) {
-            //     throw new Error('Network response Error');
-            // }
-
-            // let blob = await response.blob();
-            // let imageUrl = URL.createObjectURL(blob);
+            let blob = await response.blob();
+            let imageUrl = URL.createObjectURL(blob);
 
             let qrDiv = document.getElementById("qrDiv");
             qrDiv.setAttribute("class", 'QrDiv bg-success p-0 d-flex justify-content-center align-items-center');
 
             let img = document.getElementById("qrImg");
-            img.setAttribute('src', `${response}`);
+            img.setAttribute('src', `${imageUrl}`);
 
             let buttonDownload = document.getElementById("buttonDownload");
             buttonDownload.removeAttribute("disabled");
             buttonDownload.setAttribute('class', 'btn btn-success col-8 col-md-6 col-lg-5 mt-3');
-            buttonDownload.setAttribute('href', response);
+            buttonDownload.setAttribute('href', imageUrl);
             buttonDownload.setAttribute('download', 'qrcode.png');
         } catch (error) {
             // alert('There is a problem while fetching/ \nMaybe the Server Down \n', error);
