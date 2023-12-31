@@ -102,7 +102,7 @@ let getQRCode = async () => {
 
             let blob = await response.blob();
             let imageUrl = URL.createObjectURL(blob);
-
+            console.log(imageUrl);
             let qrDiv = document.getElementById("qrDiv");
             qrDiv.setAttribute("class", 'QrDiv bg-success p-0 d-flex justify-content-center align-items-center');
 
