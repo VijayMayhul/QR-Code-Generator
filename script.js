@@ -116,7 +116,9 @@ let getQRCode = async () => {
             buttonDownload.setAttribute('href', imageUrl);
             buttonDownload.setAttribute('download', 'qrcode.png');
         } catch (error) {
-            alert('There is a problem while fetching:', error);
+            alert(`Maybe the Server Down, Try Again Later/
+There is a problem while fetching/
+${error}`);   
         }
     }
     document.getElementById("Url").value = "";
