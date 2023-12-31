@@ -94,25 +94,28 @@ let getQRCode = async () => {
         alert(`You have to give some value in the input field`);
     } else {
         try {
-            let response = await fetch(`http://api.qrserver.com/v1/create-qr-code/?size=400x400&data=${url}`);
-            
-            if (!response.ok) {
-                throw new Error('Network response Error');
-            }
+            // let response = await fetch(`http://api.qrserver.com/v1/create-qr-code/?size=400x400&data=${url}`);
+            // let response = `https://www.qrtag.net/api/qr_transparent.png?url=${url}&size=300`;
 
-            let blob = await response.blob();
-            let imageUrl = URL.createObjectURL(blob);
-            console.log(imageUrl);
+            let response = `http://api.qrserver.com/v1/create-qr-code/?size=400x400&data=${url}`;
+
+            // if (!response.ok) {
+            //     throw new Error('Network response Error');
+            // }
+
+            // let blob = await response.blob();
+            // let imageUrl = URL.createObjectURL(blob);
+
             let qrDiv = document.getElementById("qrDiv");
             qrDiv.setAttribute("class", 'QrDiv bg-success p-0 d-flex justify-content-center align-items-center');
 
             let img = document.getElementById("qrImg");
-            img.setAttribute('src', `${imageUrl}`);
+            img.setAttribute('src', `${response}`);
 
             let buttonDownload = document.getElementById("buttonDownload");
             buttonDownload.removeAttribute("disabled");
             buttonDownload.setAttribute('class', 'btn btn-success col-8 col-md-6 col-lg-5 mt-3');
-            buttonDownload.setAttribute('href', imageUrl);
+            buttonDownload.setAttribute('href', response);
             buttonDownload.setAttribute('download', 'qrcode.png');
         } catch (error) {
             // alert('There is a problem while fetching/ \nMaybe the Server Down \n', error);
