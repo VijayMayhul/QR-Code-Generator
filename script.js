@@ -95,7 +95,7 @@ let getQRCode = async () => {
         alert(`You have to give some value in the input field`);
     } else {
         try {
-            let response = await fetch(`http://api.qrserver.com/v1/create-qr-code/?data=${url}!&size=400x400`);
+            let response = await fetch(`http://api.qrserver.com/v1/create-qr-code/?data=${url}&size=400x400`);
             
             if (!response.ok) {
                 throw new Error('Network response Error');
