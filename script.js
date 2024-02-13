@@ -1,4 +1,3 @@
-
 //container
 const container = document.createElement("div");
 container.setAttribute('class', 'container h-100');
@@ -95,8 +94,9 @@ let getQRCode = async () => {
         alert(`You have to give some value in the input field`);
     } else {
         try {
-            let response = await fetch(`http://api.qrserver.com/v1/create-qr-code/?data=${url}!&size=400x400`);
-            
+            let response = await fetch(`https://api.qrserver.com/v1/create-qr-code/?size=400x400&data=${url}`);
+            // let response = `https://www.qrtag.net/api/qr_transparent.png?url=${url}&size=300`;
+
             if (!response.ok) {
                 throw new Error('Network response Error');
             }
@@ -115,11 +115,25 @@ let getQRCode = async () => {
             buttonDownload.setAttribute('class', 'btn btn-success col-8 col-md-6 col-lg-5 mt-3');
             buttonDownload.setAttribute('href', imageUrl);
             buttonDownload.setAttribute('download', 'qrcode.png');
+
+            buttonDownload.addEventListener('click', () => {
+
+                setTimeout(() => {
+                    qrDiv.setAttribute('class', 'QrDiv bg-secondary p-0 d-flex justify-content-center align-items-center');
+                img.setAttribute('src', 'Img/qr_gif2.gif');
+                buttonDownload.setAttribute('class', 'btn btn-secondary disabled col-8 col-md-6 col-lg-5');
+                document.getElementById("Url").value = "";
+                }, 10000);
+
+            });
         } catch (error) {
-            alert('There is a problem while fetching:', error);
+            // alert('There is a problem while fetching/ \nMaybe the Server Down \n', error);
+            alert(`Maybe the Server Down, Try Again Later/
+There is a problem while fetching/
+${error}`);
         }
     }
-    document.getElementById("Url").value = "";
+    
 };
 
 
